@@ -39,7 +39,7 @@
 
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
 
-        <PackageReference Include="Soenneker.ServiceBus.Queue" Version="1.0.79" />
+        <PackageReference Include="Soenneker.ServiceBus.Queue" Version="1.0.82" />
 
         <PackageReference Include="Soenneker.Utils.SingletonDictionary" Version="1.0.40" />
     </ItemGroup>
