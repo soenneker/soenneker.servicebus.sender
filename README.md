@@ -8,5 +8,5 @@
 ## Installation
 
 ```
-Install-Package Soenneker.ServiceBus.Sender
+dotnet add package Soenneker.ServiceBus.Sender
 ```
