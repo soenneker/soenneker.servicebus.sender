@@ -41,6 +41,6 @@
 
         <PackageReference Include="Soenneker.ServiceBus.Queue" Version="2.1.467" />
 
-        <PackageReference Include="Soenneker.Utils.SingletonDictionary" Version="2.1.201" />
+        <PackageReference Include="Soenneker.Utils.SingletonDictionary" Version="2.1.202" />
     </ItemGroup>
 </Project>
