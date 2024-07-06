@@ -1,6 +1,7 @@
-using System;
-using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Soenneker.ServiceBus.Sender.Abstract;
 
@@ -10,5 +11,5 @@ namespace Soenneker.ServiceBus.Sender.Abstract;
 /// </summary>
 public interface IServiceBusSenderUtil : IDisposable, IAsyncDisposable
 {
-    ValueTask<ServiceBusSender> GetSender(string queueName);
+    ValueTask<ServiceBusSender> Get(string queueName, CancellationToken cancellationToken = default);
 }

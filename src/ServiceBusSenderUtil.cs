@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
+using Soenneker.Extensions.ValueTask;
 using Soenneker.ServiceBus.Client.Abstract;
 using Soenneker.ServiceBus.Queue.Abstract;
 using Soenneker.ServiceBus.Sender.Abstract;
@@ -15,21 +17,21 @@ public class ServiceBusSenderUtil : IServiceBusSenderUtil
 
     public ServiceBusSenderUtil(IServiceBusClientUtil serviceBusClientUtil, IServiceBusQueueUtil serviceBusQueueUtil)
     {
-        _senders = new SingletonDictionary<ServiceBusSender>(async queue =>
+        _senders = new SingletonDictionary<ServiceBusSender>(async (queueName, token, _) =>
         {
-            var queueName = (string)queue![0];
+            await serviceBusQueueUtil.CreateQueueIfDoesNotExist(queueName).NoSync();
 
-            await serviceBusQueueUtil.CreateQueueIfDoesNotExist(queueName);
+            ServiceBusClient client = await serviceBusClientUtil.Get(token).NoSync();
 
-            ServiceBusSender? sender = (await serviceBusClientUtil.GetClient()).CreateSender(queueName);
+            ServiceBusSender sender = client.CreateSender(queueName);
 
             return sender;
         });
     }
 
-    public ValueTask<ServiceBusSender> GetSender(string queueName)
+    public ValueTask<ServiceBusSender> Get(string queueName, CancellationToken cancellationToken = default)
     {
-        return _senders.Get(queueName, queueName);
+        return _senders.Get(queueName, cancellationToken);
     }
 
     public ValueTask DisposeAsync()
