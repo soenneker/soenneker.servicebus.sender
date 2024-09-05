@@ -38,6 +38,6 @@
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
 
         <PackageReference Include="Soenneker.ServiceBus.Queue" Version="2.1.958" />
-        <PackageReference Include="Soenneker.Utils.SingletonDictionary" Version="2.1.413" />
+        <PackageReference Include="Soenneker.Utils.SingletonDictionary" Version="2.1.419" />
     </ItemGroup>
 </Project>
