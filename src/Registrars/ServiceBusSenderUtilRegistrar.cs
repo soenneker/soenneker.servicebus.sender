@@ -10,12 +10,15 @@ namespace Soenneker.ServiceBus.Sender.Registrars;
 /// </summary>
 public static class ServiceBusSenderUtilRegistrar
 {
-    /// <summary>
-    /// As Singleton
-    /// </summary>
-    public static void AddServiceBusSenderUtil(this IServiceCollection services)
+    public static void AddServiceBusSenderUtilAsSingleton(this IServiceCollection services)
     {
         services.AddServiceBusQueueUtil();
         services.TryAddSingleton<IServiceBusSenderUtil, ServiceBusSenderUtil>();
+    }
+
+    public static void AddServiceBusSenderUtilAsScoped(this IServiceCollection services)
+    {
+        services.AddServiceBusQueueUtil();
+        services.TryAddScoped<IServiceBusSenderUtil, ServiceBusSenderUtil>();
     }
 }
