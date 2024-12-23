@@ -12,13 +12,13 @@ public static class ServiceBusSenderUtilRegistrar
 {
     public static void AddServiceBusSenderUtilAsSingleton(this IServiceCollection services)
     {
-        services.AddServiceBusQueueUtil();
+        services.AddServiceBusQueueUtilAsSingleton();
         services.TryAddSingleton<IServiceBusSenderUtil, ServiceBusSenderUtil>();
     }
 
     public static void AddServiceBusSenderUtilAsScoped(this IServiceCollection services)
     {
-        services.AddServiceBusQueueUtil();
+        services.AddServiceBusQueueUtilAsSingleton();
         services.TryAddScoped<IServiceBusSenderUtil, ServiceBusSenderUtil>();
     }
 }
