@@ -37,7 +37,7 @@
         <None Include="..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
 
-        <PackageReference Include="Soenneker.ServiceBus.Queue" Version="3.0.1620" />
+        <PackageReference Include="Soenneker.ServiceBus.Queue" Version="3.0.1622" />
         <PackageReference Include="Soenneker.Utils.SingletonDictionary" Version="3.0.858" />
     </ItemGroup>
 </Project>
