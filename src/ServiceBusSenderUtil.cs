@@ -23,9 +23,7 @@ public class ServiceBusSenderUtil : IServiceBusSenderUtil
 
             ServiceBusClient client = await serviceBusClientUtil.Get(token).NoSync();
 
-            ServiceBusSender sender = client.CreateSender(queueName);
-
-            return sender;
+            return client.CreateSender(queueName);
         });
     }
 
