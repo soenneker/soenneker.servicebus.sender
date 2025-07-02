@@ -11,7 +11,7 @@ using Soenneker.Utils.SingletonDictionary;
 namespace Soenneker.ServiceBus.Sender;
 
 ///<inheritdoc cref="IServiceBusSenderUtil"/>
-public class ServiceBusSenderUtil : IServiceBusSenderUtil
+public sealed class ServiceBusSenderUtil : IServiceBusSenderUtil
 {
     private readonly SingletonDictionary<ServiceBusSender> _senders;
 
@@ -34,15 +34,11 @@ public class ServiceBusSenderUtil : IServiceBusSenderUtil
 
     public ValueTask DisposeAsync()
     {
-        GC.SuppressFinalize(this);
-
         return _senders.DisposeAsync();
     }
 
     public void Dispose()
     {
-        GC.SuppressFinalize(this);
-
         _senders.Dispose();
     }
 }
