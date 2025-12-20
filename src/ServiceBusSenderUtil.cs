@@ -17,11 +17,13 @@ public sealed class ServiceBusSenderUtil : IServiceBusSenderUtil
 
     public ServiceBusSenderUtil(IServiceBusClientUtil serviceBusClientUtil, IServiceBusQueueUtil serviceBusQueueUtil)
     {
-        _senders = new SingletonDictionary<ServiceBusSender>(async (queueName, token, _) =>
+        _senders = new SingletonDictionary<ServiceBusSender>(async (queueName, token) =>
         {
-            await serviceBusQueueUtil.CreateQueueIfDoesNotExist(queueName).NoSync();
+            await serviceBusQueueUtil.CreateQueueIfDoesNotExist(queueName)
+                                     .NoSync();
 
-            ServiceBusClient client = await serviceBusClientUtil.Get(token).NoSync();
+            ServiceBusClient client = await serviceBusClientUtil.Get(token)
+                                                                .NoSync();
 
             return client.CreateSender(queueName);
         });
