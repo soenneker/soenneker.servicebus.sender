@@ -14,19 +14,25 @@ namespace Soenneker.ServiceBus.Sender;
 public sealed class ServiceBusSenderUtil : IServiceBusSenderUtil
 {
     private readonly SingletonDictionary<ServiceBusSender> _senders;
+    private readonly IServiceBusClientUtil _serviceBusClientUtil;
+    private readonly IServiceBusQueueUtil _serviceBusQueueUtil;
 
     public ServiceBusSenderUtil(IServiceBusClientUtil serviceBusClientUtil, IServiceBusQueueUtil serviceBusQueueUtil)
     {
-        _senders = new SingletonDictionary<ServiceBusSender>(async (queueName, token) =>
-        {
-            await serviceBusQueueUtil.CreateQueueIfDoesNotExist(queueName)
-                                     .NoSync();
+        _serviceBusClientUtil = serviceBusClientUtil;
+        _serviceBusQueueUtil = serviceBusQueueUtil;
+        _senders = new SingletonDictionary<ServiceBusSender>(CreateSender);
+    }
 
-            ServiceBusClient client = await serviceBusClientUtil.Get(token)
-                                                                .NoSync();
+    private async ValueTask<ServiceBusSender> CreateSender(string queueName, CancellationToken token)
+    {
+        await _serviceBusQueueUtil.CreateQueueIfDoesNotExist(queueName)
+                                  .NoSync();
 
-            return client.CreateSender(queueName);
-        });
+        ServiceBusClient client = await _serviceBusClientUtil.Get(token)
+                                                            .NoSync();
+
+        return client.CreateSender(queueName);
     }
 
     public ValueTask<ServiceBusSender> Get(string queueName, CancellationToken cancellationToken = default)
