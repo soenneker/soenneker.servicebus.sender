@@ -24,12 +24,12 @@ public sealed class ServiceBusSenderUtil : IServiceBusSenderUtil
         _senders = new SingletonDictionary<ServiceBusSender>(CreateSender);
     }
 
-    private async ValueTask<ServiceBusSender> CreateSender(string queueName, CancellationToken token)
+    private async ValueTask<ServiceBusSender> CreateSender(string queueName, CancellationToken cancellationToken)
     {
-        await _serviceBusQueueUtil.CreateQueueIfDoesNotExist(queueName)
+        await _serviceBusQueueUtil.CreateQueueIfDoesNotExist(queueName, cancellationToken)
                                   .NoSync();
 
-        ServiceBusClient client = await _serviceBusClientUtil.Get(token)
+        ServiceBusClient client = await _serviceBusClientUtil.Get(cancellationToken)
                                                             .NoSync();
 
         return client.CreateSender(queueName);
