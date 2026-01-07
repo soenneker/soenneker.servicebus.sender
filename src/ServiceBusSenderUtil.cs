@@ -6,7 +6,7 @@ using Soenneker.Extensions.ValueTask;
 using Soenneker.ServiceBus.Client.Abstract;
 using Soenneker.ServiceBus.Queue.Abstract;
 using Soenneker.ServiceBus.Sender.Abstract;
-using Soenneker.Utils.SingletonDictionary;
+using Soenneker.Dictionaries.Singletons;
 
 namespace Soenneker.ServiceBus.Sender;
 
@@ -30,7 +30,7 @@ public sealed class ServiceBusSenderUtil : IServiceBusSenderUtil
                                   .NoSync();
 
         ServiceBusClient client = await _serviceBusClientUtil.Get(cancellationToken)
-                                                            .NoSync();
+                                                             .NoSync();
 
         return client.CreateSender(queueName);
     }
