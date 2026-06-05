@@ -10,6 +10,11 @@ namespace Soenneker.ServiceBus.Sender.Registrars;
 /// </summary>
 public static class ServiceBusSenderUtilRegistrar
 {
+    /// <summary>
+    /// Adds service bus sender util as singleton.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <returns>The result of the operation.</returns>
     public static IServiceCollection AddServiceBusSenderUtilAsSingleton(this IServiceCollection services)
     {
         services.AddServiceBusQueueUtilAsSingleton().TryAddSingleton<IServiceBusSenderUtil, ServiceBusSenderUtil>();
@@ -17,6 +22,11 @@ public static class ServiceBusSenderUtilRegistrar
         return services;
     }
 
+    /// <summary>
+    /// Adds service bus sender util as scoped.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <returns>The result of the operation.</returns>
     public static IServiceCollection AddServiceBusSenderUtilAsScoped(this IServiceCollection services)
     {
         services.AddServiceBusQueueUtilAsSingleton().TryAddScoped<IServiceBusSenderUtil, ServiceBusSenderUtil>();
