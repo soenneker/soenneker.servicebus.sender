@@ -10,7 +10,7 @@ using Soenneker.Dictionaries.Singletons;
 
 namespace Soenneker.ServiceBus.Sender;
 
-///<inheritdoc cref="IServiceBusSenderUtil"/>
+/// <inheritdoc cref="IServiceBusSenderUtil"/>
 public sealed class ServiceBusSenderUtil : IServiceBusSenderUtil
 {
     private readonly SingletonDictionary<ServiceBusSender> _senders;
