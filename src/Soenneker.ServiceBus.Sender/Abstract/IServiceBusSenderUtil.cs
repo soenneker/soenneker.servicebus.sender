@@ -12,10 +12,10 @@ namespace Soenneker.ServiceBus.Sender.Abstract;
 public interface IServiceBusSenderUtil : IDisposable, IAsyncDisposable
 {
     /// <summary>
-    /// Gets the value.
+    /// Returns the configured service Bus Sender used by the Service Bus Sender.
     /// </summary>
-    /// <param name="queueName">The queue name.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task containing the result of the operation.</returns>
+    /// <param name="queueName">Name of the queue to target.</param>
+    /// <param name="cancellationToken">Token used to cancel the operation.</param>
+    /// <returns>A task whose result is the requested service Bus Sender.</returns>
     ValueTask<ServiceBusSender> Get(string queueName, CancellationToken cancellationToken = default);
 }
