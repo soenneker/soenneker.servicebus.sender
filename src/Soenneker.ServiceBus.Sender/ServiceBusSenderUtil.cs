@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
@@ -10,7 +10,6 @@ using Soenneker.Dictionaries.Singletons;
 
 namespace Soenneker.ServiceBus.Sender;
 
-/// <inheritdoc cref="IServiceBusSenderUtil"/>
 public sealed class ServiceBusSenderUtil : IServiceBusSenderUtil
 {
     private readonly SingletonDictionary<ServiceBusSender> _senders;
@@ -40,18 +39,11 @@ public sealed class ServiceBusSenderUtil : IServiceBusSenderUtil
         return _senders.Get(queueName, cancellationToken);
     }
 
-    /// <summary>
-    /// Asynchronously releases resources used by the current instance.
-    /// </summary>
-    /// <returns>A task that represents the asynchronous operation.</returns>
     public ValueTask DisposeAsync()
     {
         return _senders.DisposeAsync();
     }
 
-    /// <summary>
-    /// Releases resources used by the current instance.
-    /// </summary>
     public void Dispose()
     {
         _senders.Dispose();
