@@ -43,6 +43,6 @@
 
     <ItemGroup>
         <PackageReference Include="Soenneker.ServiceBus.Queue" Version="4.0.2403" />
-        <PackageReference Include="Soenneker.Dictionaries.Singletons" Version="4.0.106" />
+        <PackageReference Include="Soenneker.Dictionaries.Singletons" Version="4.0.107" />
     </ItemGroup>
 </Project>
